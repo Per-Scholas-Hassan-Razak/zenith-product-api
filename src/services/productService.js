@@ -21,11 +21,7 @@ const updateProductById = async (id, update) => {
     runValidators: true,
   };
 
-  const product = await Product.findByIdAndUpdate(
-    id,
-    update,
-    options,
-  );
+  const product = await Product.findByIdAndUpdate(id, update, options);
 
   if (!product) {
     const error = new Error(`product with ${id} NOT FOUND`);
@@ -36,9 +32,25 @@ const updateProductById = async (id, update) => {
   return product;
 };
 
-const getAllProducts = async(req, res) => {
-    const productsList = await Product.find({})
-    return productsList
-}
+const getAllProducts = async (req, res) => {
+  const productsList = await Product.find({});
+  return productsList;
+};
 
-module.exports = { createProduct, findProductById, updateProductById, getAllProducts };
+const deleteProductById = async (id) => {
+  const product = await Product.findByIdAndDelete(id);
+  if (!product) {
+    const error = new Error(`product with ${id} NOT FOUND`);
+    error.statusCode = 404;
+    throw error;
+  }
+  return product;
+};
+
+module.exports = {
+  createProduct,
+  findProductById,
+  updateProductById,
+  getAllProducts,
+  deleteProductById
+};

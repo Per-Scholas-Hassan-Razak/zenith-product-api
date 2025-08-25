@@ -46,5 +46,15 @@ const getAllProducts = async(req, res) => {
   
 }
 
+const deleteProductById = async(req,res) => {
+    try{
+        const id = req.params.id
+        const product = productService.deleteProductById(id)
+        res.status(200).json(`Product with ${id} successfully deleted`)
+    }catch(error){
+        handleError(res, error)
+    }
+}
 
-module.exports = {createProduct, findProductById, updateProductById,getAllProducts}
+
+module.exports = {createProduct, findProductById, updateProductById,getAllProducts, deleteProductById}
