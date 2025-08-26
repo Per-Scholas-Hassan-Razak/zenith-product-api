@@ -32,7 +32,7 @@ const updateProductById = async (id, update) => {
   return product;
 };
 
-const getAllProducts = async (req, res) => {
+const getAllProducts = async () => {
   const productsList = await Product.find({});
   return productsList;
 };
@@ -47,10 +47,22 @@ const deleteProductById = async (id) => {
   return product;
 };
 
+const advancedQuerying = async (category, minPrice, maxPrice) => {
+  if (typeof category !== "string") {
+    throw new Error("Invalid category type passed to DB query");
+  }
+
+  return await Product.find({
+    category,
+    price: { $gte: minPrice, $lte: maxPrice },
+  }).sort({ price: -1 })
+};
+
 module.exports = {
   createProduct,
   findProductById,
   updateProductById,
   getAllProducts,
-  deleteProductById
+  deleteProductById,
+  advancedQuerying,
 };

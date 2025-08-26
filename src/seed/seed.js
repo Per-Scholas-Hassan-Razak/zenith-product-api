@@ -8,7 +8,8 @@ const seedData = [
         price: 4.99,
         category: "Groceries",
         inStock: true,
-        tags: ['dukes', 'mayonaise', 'sandwich', 'happiness']
+        tags: ['dukes', 'mayonaise', 'sandwich', 'happiness'],
+        
         
     },
     {
